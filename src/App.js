@@ -1,24 +1,21 @@
-import logo from './logo.svg';
+import { Navigate, Route, Routes } from "react-router-dom";
 import './App.css';
+import { API } from "./shared/api";
+import AppPosts from "./components/AppPosts";
+import AddPost from "./components/AddPost";
+import SinglePost from "./components/SinglePost";
+
 
 function App() {
+  API.get("/Messages/greet");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Navigate to="/posts" />}></Route>
+      <Route path="/posts" element={<AppPosts />}></Route>
+      <Route path="/add" element={<AddPost />}></Route>
+      <Route path="/posts/:id" element={<SinglePost />}></Route>
+      <Route path="/posts/edit/:id" element={<AddPost />}></Route>
+    </Routes>
   );
 }
 
